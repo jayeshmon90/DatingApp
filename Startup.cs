@@ -30,6 +30,7 @@ namespace DatingApp.API
             var connection="Server=ADMIN-PC;Database=DatingApp;Trusted_Connection=True;MultipleActiveResultSets=true";
             services.AddDbContext<DataContext>(x => x.UseSqlServer(connection));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +46,7 @@ namespace DatingApp.API
             }
 
             app.UseHttpsRedirection();
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             app.UseMvc();
         }
     }
